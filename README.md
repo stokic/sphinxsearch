@@ -49,20 +49,27 @@ return array (
 
 ## Usage
 
+You can add this line to the files, where you may use SphinxSearch:
+```php
+use MeridianStudio\SphinxSearch\SphinxSearch;
+```
 
 Basic query (raw sphinx results)
 ```php
-$results = SphinxSearch::search('my query')->query();
+$sphinx = new SphinxSearch();
+$results = $sphinx->search('my query')->query();
 ```
 
 Basic query (with Eloquent)
 ```php
-$results = SphinxSearch::search('my query')->get();
+$sphinx = new SphinxSearch();
+$results = $sphinx->search('my query')->get();
 ```
 
 Query another Sphinx index with limit and filters.
 ```php
-$results = SphinxSearch::search('my query', 'index_name')
+$sphinx = new SphinxSearch();
+$results = $sphinx->search('my query', 'index_name')
 	->limit(30)
 	->filter('attribute', array(1, 2))
 	->range('int_attribute', 1, 10)
@@ -71,7 +78,8 @@ $results = SphinxSearch::search('my query', 'index_name')
 
 Query with match and sort type specified.
 ```php
-$result = SphinxSearch::search('my query', 'index_name')
+$sphinx = new SphinxSearch();
+$result = $sphinx->search('my query', 'index_name')
 	->setFieldWeights(
 		array(
 			'partno'  => 10,
@@ -87,8 +95,9 @@ Query and sort with geo-distant searching.
 ```php
 $radius = 1000; //in meters
 $latitude = deg2rad(25.99);
-$longitude = deg2rad(-80.35);
-$result = SphinxSearch::search('my_query', 'index_name')
+$longitude = deg2ra
+$sphinx = new SphinxSearch();d(-80.35);
+$result = $sphinx->search('my_query', 'index_name')
 	->setSortMode(\Sphinx\SphinxClient::SPH_SORT_EXTENDED, '@geodist ASC')
 	->setFilterFloatRange('@geodist', 0.0, $radius)
 	->setGeoAnchor('lat', 'lng', $latitude, $longitude)
@@ -96,7 +105,8 @@ $result = SphinxSearch::search('my_query', 'index_name')
 ```
 ## Integration with Eloquent
 
-This package integrates well with Eloquent. You can change index configuration with `modelname` to get Eloquent's Collection (Illuminate\Database\Eloquent\Collection) as a result of `SphinxSearch::search`.
+$sphinx = new SphinxSearch();
+This package integrates well with Eloquent. You can change index configuration with `modelname` to get Eloquent's Collection (Illuminate\Database\Eloquent\Collection) as a result of `$sphinx->search`.
 ```php
 return array (
 	'host'    => '127.0.0.1',
@@ -109,11 +119,12 @@ return array (
 
 Eager loading with Eloquent is the same an one would expect:
 ```php
-$results = SphinxSearch::search('monkeys')->with('arms', 'legs', 'otherLimbs')->get();
+$sphinx = new SphinxSearch();
+$results = $sphinx->search('monkeys')->with('arms', 'legs', 'otherLimbs')->get();
 ```
 More on eager loading: http://laravel.com/docs/eloquent#eager-loading
 
-## Paging results in Laravel 4 (with caching)
+## Paging results in Laravel 5 (with caching)
 
 ```php
 Route::get('/search', function ()
@@ -124,7 +135,8 @@ Route::get('/search', function ()
     // use a cache so you dont have to keep querying sphinx for every page!
     $results = Cache::remember(Str::slug($search), 10, function () use($search)
     {
-        return SphinxSearch::search($search)
+    $sphinx = new SphinxSearch();
+        return $sphinx->search($search)
         ->setMatchMode(\Sphinx\SphinxClient::SPH_MATCH_EXTENDED2)
         ->get();
     });
@@ -148,7 +160,8 @@ Route::get('/search', function ()
     $perPage = 15;  //number of results per page
     $items = null;
 
-    $results = SphinxSearch::search($search)
+$sphinx = new SphinxSearch();
+    $results = $sphinx->search($search)
         ->setMatchMode(\Sphinx\SphinxClient::SPH_MATCH_EXTENDED2)
         ->limit($perPage, ($page-1)* $perPage)
         ->get();
@@ -160,7 +173,8 @@ Route::get('/search', function ()
         $items->appends(['search' => $search]); //add search query string
     }
 
-    if($error = SphinxSearch::getErrorMessage())
+$sphinx = new SphinxSearch();
+    if($error = $sphinx->getErrorMessage())
     {
         //
     }
@@ -189,7 +203,8 @@ return array (
 You can also pass in multiple indexes (separated by comma or space) to your search like so (if the "mapping" key is not specified in the config, search retrieves ids):
 
 ```php
-SphinxSearch::search('lorem', 'main, delta')->get();
+$sphinx = new SphinxSearch();
+$sphinx->search('lorem', 'main, delta')->get();
 ```
 
 
@@ -198,12 +213,14 @@ SphinxSearch::search('lorem', 'main, delta')->get();
 It is nifty to display excerpts with keywords highlighted in search result. Sphinx supports this feature natively. http://sphinxsearch.com/docs/archives/2.0.3/api-func-buildexcerpts.html
 
 ```php
-$search = SphinxSearch::search($term, 'articles');
+$sphinx = new SphinxSearch();
+$search = $sphinx->search($term, 'articles');
 $articles = $search->get();
 $excerpt = $search->excerpt(current($articles)->content);
 
 or
 
-$search = SphinxSearch::search($term, 'articles');
+$sphinx = new SphinxSearch();
+$search = $sphinx->search($term, 'articles');
 dd($search->excerpts(array_pluck($articles, 'content')));
 ```
