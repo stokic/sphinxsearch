@@ -1,6 +1,6 @@
 <?php
 
-namespace Scalia\SphinxSearch;
+namespace MeridianStudio\SphinxSearch;
 
 use Illuminate\Support\Facades\Facade;
 

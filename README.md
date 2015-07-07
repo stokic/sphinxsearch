@@ -1,35 +1,20 @@
 # Sphinx Search
 
-[![Build Status](http://img.shields.io/travis/scalia/sphinxsearch.svg?style=flat)](https://travis-ci.org/scalia/sphinxsearch)
-[![License](http://img.shields.io/packagist/l/scalia/sphinxsearch.svg?style=flat)](https://packagist.org/packages/scalia/sphinxsearch)
-[![Latest Stable Version](http://img.shields.io/packagist/v/scalia/sphinxsearch.svg?style=flat)](https://packagist.org/packages/scalia/sphinxsearch)
-[![Total Downloads](http://img.shields.io/packagist/dt/scalia/sphinxsearch.svg?style=flat)](https://packagist.org/packages/scalia/sphinxsearch)
-[![Monthly Downloads](http://img.shields.io/packagist/dm/scalia/sphinxsearch.svg?style=flat)](https://packagist.org/packages/scalia/sphinxsearch)
-[![Stories in Ready](https://badge.waffle.io/scalia/sphinxsearch.png?label=ready&title=Ready)](https://waffle.io/scalia/sphinxsearch)
-[![Stars](https://img.shields.io/github/stars/scalia/sphinxsearch.svg)](https://github.com/scalia/sphinxsearch/stargazers)
-[![Forks](https://img.shields.io/github/forks/scalia/sphinxsearch.svg)](https://github.com/scalia/sphinxsearch/network)
-
-Sphinx Search is a package for Laravel 4 which queries Sphinxsearch and integrates with Eloquent.
+Sphinx Search is a package for Laravel 5 which queries Sphinxsearch and integrates with Eloquent.
 
 
 ## Installation
 
-Add `scalia/sphinxsearch` to `composer.json`.
+Add `MeridianStudio/sphinxsearch` to `composer.json`.
 
-    "scalia/sphinxsearch": "dev-master"
+    "MeridianStudio/sphinxsearch": "dev-master"
 
 Run `composer update` to pull down the latest version of Sphinx Search.
 
 Now open up `app/config/app.php` and add the service provider to your `providers` array.
 ```php
 'providers' => array(
-	'Scalia\SphinxSearch\SphinxSearchServiceProvider',
-)
-```
-Now add the alias.
-```php
-'aliases' => array(
-	'SphinxSearch' => 'Scalia\SphinxSearch\SphinxSearchFacade',
+	MeridianStudio\SphinxSearch\SphinxSearchServiceProvider::class,
 )
 ```
 ## Configuration
@@ -37,10 +22,10 @@ Now add the alias.
 To use Sphinx Search, you need to configure your indexes and what model it should query. To do so, publish the configuration into your app.
 
 ```php
-php artisan config:publish scalia/sphinxsearch
+php artisan config:publish MeridianStudio/sphinxsearch
 ```
 
-This will create the file `app/config/packages/scalia/sphinxsearch/config.php`. Modify as needed the host and port, and configure the indexes, binding them to a table and id column.
+This will create the file `app/config/packages/MeridianStudio/sphinxsearch/config.php`. Modify as needed the host and port, and configure the indexes, binding them to a table and id column.
 
 ```php
 return array (
@@ -177,7 +162,7 @@ Route::get('/search', function ()
 
     if($error = SphinxSearch::getErrorMessage())
     {
-        // 
+        //
     }
 });
 ```

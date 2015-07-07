@@ -1,28 +1,28 @@
 {
-  "name": "scalia/sphinxsearch",
-  "description": "Laravel package to query Sphinxsearch",
-  "keywords": [
+    "name": "sasha7/sphinxsearch",
+    "description": "Laravel 5 package to query Sphinxsearch",
+    "keywords": [
     "sphinx",
     "sphinxsearch",
     "laravel",
     "laravel 4"
   ],
-  "homepage": "http://github.com/scalia/sphinxsearch",
-  "license": "Apache-2.0",
-  "authors": [
-    {
-      "name": "Scalia",
-      "email": "contacto@scalia.es"
+    "homepage": "http://github.com/sasha7/sphinxsearch",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Sasha",
+            "email": "sasa@meridian-studio.com"
     }
   ],
-  "require": {
-    "php": ">=5.3.0",
-    "illuminate/support": "~4.0",
-    "gigablah/sphinxphp": "2.0.8"
-  },
-  "autoload": {
-    "psr-0": {
-      "Scalia\\SphinxSearch": "src/"
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "~5",
+        "gigablah/sphinxphp": "2.0.8"
+    },
+    "autoload": {
+        "psr-0": {
+            "MeridianStudio\\SphinxSearch": "src/"
+        }
     }
-  }
 }

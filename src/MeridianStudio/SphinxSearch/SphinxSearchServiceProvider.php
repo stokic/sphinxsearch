@@ -1,4 +1,4 @@
-<?php namespace Scalia\SphinxSearch;
+<?php namespace MeridianStudio\SphinxSearch;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +18,7 @@ class SphinxSearchServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('scalia/sphinxsearch');
+		$this->publishes([__DIR__.'/../../config/config.php' => config_path('sphinxsearch.php'),], 'config');
 	}
 
 	/**
