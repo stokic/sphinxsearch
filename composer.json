@@ -5,7 +5,7 @@
     "sphinx",
     "sphinxsearch",
     "laravel",
-    "laravel 4"
+    "laravel 5"
   ],
     "homepage": "http://github.com/sasha7/sphinxsearch",
     "license": "Apache-2.0",

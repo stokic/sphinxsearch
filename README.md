@@ -22,10 +22,10 @@ Now open up `app/config/app.php` and add the service provider to your `providers
 To use Sphinx Search, you need to configure your indexes and what model it should query. To do so, publish the configuration into your app.
 
 ```php
-php artisan config:publish MeridianStudio/sphinxsearch
+php artisan vendor:publish
 ```
 
-This will create the file `app/config/packages/MeridianStudio/sphinxsearch/config.php`. Modify as needed the host and port, and configure the indexes, binding them to a table and id column.
+This will create the file `app/config/sphinxsearch.php`. Modify as needed the host and port, and configure the indexes, binding them to a table and id column.
 
 ```php
 return array (
