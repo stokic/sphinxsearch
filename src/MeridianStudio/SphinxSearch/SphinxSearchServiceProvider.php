@@ -28,10 +28,10 @@ class SphinxSearchServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['sphinxsearch'] = $this->app->share(function($app)
-		{
-			return new SphinxSearch;
-		});
+        $this->app->singleton('sphinxsearch', function()
+        {
+            return new SphinxSearch;
+        });
 	}
 
 	/**
